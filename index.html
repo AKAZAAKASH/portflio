@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Akash Chandran — Computer Science Engineering student. Building clean, performant web experiences." />
+  <meta name="author" content="Akash Chandran" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>Akash Chandran · Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============ PRELOADER / LOADING ANIMATION ============ -->
+  <div class="preloader" id="preloader" role="status" aria-label="Loading">
+    <div class="preloader-inner">
+      <div class="preloader-name" aria-hidden="true">
+        <span>A</span><span>k</span><span>a</span><span>s</span><span>h</span>
+        <span class="space">&nbsp;</span>
+        <span>C</span><span>h</span><span>a</span><span>n</span><span>d</span><span>r</span><span>a</span><span>n</span>
+      </div>
+      <div class="preloader-role" aria-hidden="true">Computer Science Engineer</div>
+      <div class="preloader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Scroll progress indicator (styled as a Rocket League boost meter) -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Boost gauge — mirrors RL's in-game boost meter, fills as you scroll -->
+  <div class="boost-meter" id="boostMeter" aria-hidden="true">
+    <div class="boost-gauge" id="boostGauge">
+      <div class="boost-rim" id="boostRim"></div>
+      <div class="boost-core">
+        <span class="boost-num" id="boostNum">0</span>
+        <span class="boost-label">Boost</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <nav class="nav-inner" aria-label="Primary">
+      <a href="#hero" class="brand" aria-label="Home">
+        <span class="brand-mark">AC</span>
+        <span class="brand-text">Akash&nbsp;Chandran</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#achievements" class="nav-link">Achievements</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile menu button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero section" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <p class="hero-eyebrow">Hi, I'm Akash Chandran</p>
+          <h1 class="hero-title">
+            I build <span class="accent" id="typed" aria-live="polite"></span><span class="caret" aria-hidden="true">|</span>
+          </h1>
+          <p class="hero-sub">
+            Computer Science Engineering student turning ideas into fast, accessible, and
+            delightful web experiences — bridging clean code with thoughtful design.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-ghost">Contact Me</a>
+          </div>
+
+          <ul class="hero-stats" aria-label="Quick stats">
+            <li><strong>10+</strong><span>Projects Built</span></li>
+            <li><strong>5+</strong><span>Tech Stacks</span></li>
+            <li><strong>CSE</strong><span>MBCET '27</span></li>
+          </ul>
+        </div>
+
+        <!-- Profile picture. Replace src with your photo (e.g. profile.jpg). -->
+        <div class="hero-photo reveal">
+          <div class="photo-ring" aria-hidden="true"></div>
+          <div class="photo-frame">
+            <img
+              src="akash.png"
+              alt="Portrait of Akash Chandran"
+              width="360" height="440"
+              onerror="this.style.display='none';this.parentElement.classList.add('photo-empty');"
+            />
+            <!-- Shown only if the image is missing -->
+            <div class="photo-fallback">
+              <span class="photo-fallback-mark">AC</span>
+              <span class="photo-fallback-hint">Add <code>profile.jpg</code></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint" aria-label="Scroll to about">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">01 — About</span>
+          <h2 class="section-title">A bit about me</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              I'm a Computer Science Engineering undergraduate at
+              <strong>Mar Baselios College of Engineering and Technology</strong>,
+              Thiruvananthapuram. I enjoy the full arc of building software — from
+              sketching the interface to shipping a performant, well-structured product.
+            </p>
+            <p>
+              My focus is the modern web: writing semantic, accessible markup, designing
+              with intent, and keeping things fast. I care about details — the spacing,
+              the easing curve, the empty state — because they're what make a product
+              feel trustworthy.
+            </p>
+            <p>
+              Outside coursework, I'm usually deep in a side project or learning a new tool.
+              When I step away from the screen, you'll find me chasing aerials in
+              <strong>Rocket League</strong>, listening to music, or solving puzzles — they keep
+              my reflexes quick, my game sense sharp, and my problem-solving instincts fresh.
+            </p>
+
+            <dl class="about-facts">
+              <div><dt>Education</dt><dd>B.Tech, Computer Science Engineering</dd></div>
+              <div><dt>Institute</dt><dd>MBCET, Thiruvananthapuram</dd></div>
+              <div><dt>Location</dt><dd>Kerala, India</dd></div>
+              <div><dt>Focus</dt><dd>Frontend · Web Performance · UI/UX</dd></div>
+            </dl>
+          </div>
+
+          <aside class="about-card reveal">
+            <div class="about-avatar" aria-hidden="true">AC</div>
+            <h3>Currently</h3>
+            <ul class="about-now">
+              <li>Studying core CS &amp; DSA</li>
+              <li>Building web projects with vanilla JS &amp; React</li>
+              <li>Exploring backend &amp; cloud fundamentals</li>
+              <li>Grinding competitive Rocket League</li>
+              <li>Open to internships &amp; collaboration</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section section-alt" id="experience">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">02 — Experience</span>
+          <h2 class="section-title">Where I've worked &amp; learned</h2>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline-item reveal">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-date">2025 — Present</span>
+                <span class="timeline-tag">Internship</span>
+              </div>
+              <h3>Frontend Developer Intern</h3>
+              <p class="timeline-org">Self-directed / Open Source</p>
+              <p>
+                Building responsive interfaces with semantic HTML, modern CSS, and vanilla
+                JavaScript. Shipping accessible components and improving page performance.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-date">2024</span>
+                <span class="timeline-tag">Project Work</span>
+              </div>
+              <h3>Web Development — Course Projects</h3>
+              <p class="timeline-org">MBCET, Thiruvananthapuram</p>
+              <p>
+                Designed and developed multiple academic web applications, applying data
+                structures and clean architecture principles to real problems.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <div class="timeline-meta">
+                <span class="timeline-date">2024</span>
+                <span class="timeline-tag">Workshop</span>
+              </div>
+              <h3>Hackathons &amp; Tech Workshops</h3>
+              <p class="timeline-org">Various</p>
+              <p>
+                Collaborated in fast-paced team builds, prototyping ideas end-to-end under
+                tight deadlines and presenting working demos.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">03 — Projects</span>
+          <h2 class="section-title">Things I've built</h2>
+        </header>
+
+        <div class="projects-grid">
+          <!-- Project card -->
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-icon" aria-hidden="true">P</div>
+              <div class="project-links">
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub repository" title="GitHub">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                </a>
+                <a href="https://example.com/" target="_blank" rel="noopener" aria-label="Live demo" title="Live demo">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3>Personal Portfolio</h3>
+            <p>A fast, responsive portfolio with dark/light theming, scroll animations, and accessible markup — built from scratch.</p>
+            <ul class="tech-list">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li>
+            </ul>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-icon" aria-hidden="true">T</div>
+              <div class="project-links">
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub repository" title="GitHub">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                </a>
+                <a href="https://example.com/" target="_blank" rel="noopener" aria-label="Live demo" title="Live demo">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3>TaskFlow — Productivity App</h3>
+            <p>A task manager with drag-and-drop boards, local persistence, and keyboard shortcuts for fast capture and triage.</p>
+            <ul class="tech-list">
+              <li>React</li><li>LocalStorage</li><li>CSS</li>
+            </ul>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-icon" aria-hidden="true">S</div>
+              <div class="project-links">
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub repository" title="GitHub">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                </a>
+                <a href="https://example.com/" target="_blank" rel="noopener" aria-label="Live demo" title="Live demo">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3>SkyCast — Weather Dashboard</h3>
+            <p>Live weather with geolocation, 7-day forecast, and a clean responsive UI powered by a public weather API.</p>
+            <ul class="tech-list">
+              <li>JavaScript</li><li>REST API</li><li>Chart.js</li>
+            </ul>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <div class="project-icon" aria-hidden="true">D</div>
+              <div class="project-links">
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub repository" title="GitHub">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3>DevNotes — Markdown Editor</h3>
+            <p>A distraction-free markdown editor with live preview, syntax highlighting, and export to HTML/PDF.</p>
+            <ul class="tech-list">
+              <li>JavaScript</li><li>Node.js</li><li>Marked.js</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ACHIEVEMENTS ============ -->
+    <section class="section section-alt" id="achievements">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">04 — Achievements</span>
+          <h2 class="section-title">Recognitions &amp; certifications</h2>
+        </header>
+
+        <div class="achieve-grid">
+          <article class="achieve-card reveal">
+            <div class="achieve-badge" aria-hidden="true">H</div>
+            <h3>Hackathon Finalist</h3>
+            <p>Reached the finals of an inter-college hackathon for a web-based solution built in 24 hours.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <div class="achieve-badge" aria-hidden="true">C</div>
+            <h3>Web Development Certification</h3>
+            <p>Completed a comprehensive full-stack web development program covering modern frontend and backend.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <div class="achieve-badge" aria-hidden="true">O</div>
+            <h3>Open Source Contributor</h3>
+            <p>Merged contributions to community projects, improving docs and fixing UI bugs.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <div class="achieve-badge" aria-hidden="true">A</div>
+            <h3>Academic Excellence</h3>
+            <p>Consistent strong academic standing in core Computer Science coursework.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <div class="achieve-badge" aria-hidden="true">RL</div>
+            <h3>Rocket League — Champion</h3>
+            <p>Reached the Champion tier in competitive — built on quick reflexes, sharp game sense, and clutch teamwork under pressure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">05 — Skills</span>
+          <h2 class="section-title">My toolbox</h2>
+        </header>
+
+        <div class="skills-grid">
+          <!-- Languages -->
+          <div class="skills-group reveal">
+            <h3 class="skills-group-title">Languages</h3>
+            <div class="bar-skill">
+              <div class="bar-head"><span>JavaScript</span><span>90%</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="90"></div></div>
+            </div>
+            <div class="bar-skill">
+              <div class="bar-head"><span>HTML &amp; CSS</span><span>95%</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="95"></div></div>
+            </div>
+            <div class="bar-skill">
+              <div class="bar-head"><span>Python</span><span>80%</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="80"></div></div>
+            </div>
+            <div class="bar-skill">
+              <div class="bar-head"><span>C / C++</span><span>75%</span></div>
+              <div class="bar-track"><div class="bar-fill" data-level="75"></div></div>
+            </div>
+          </div>
+
+          <!-- Frameworks -->
+          <div class="skills-group reveal">
+            <h3 class="skills-group-title">Frameworks &amp; Libraries</h3>
+            <div class="badge-cloud">
+              <span class="badge">React</span>
+              <span class="badge">Node.js</span>
+              <span class="badge">Express</span>
+              <span class="badge">Tailwind CSS</span>
+              <span class="badge">Bootstrap</span>
+              <span class="badge">Chart.js</span>
+              <span class="badge">jQuery</span>
+            </div>
+
+            <h3 class="skills-group-title mt">Concepts</h3>
+            <div class="badge-cloud">
+              <span class="badge">Responsive Design</span>
+              <span class="badge">Accessibility</span>
+              <span class="badge">REST APIs</span>
+              <span class="badge">Data Structures</span>
+              <span class="badge">Git Workflows</span>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="skills-group reveal">
+            <h3 class="skills-group-title">Tools &amp; Platforms</h3>
+            <div class="badge-cloud">
+              <span class="badge">Git &amp; GitHub</span>
+              <span class="badge">VS Code</span>
+              <span class="badge">Figma</span>
+              <span class="badge">Vite</span>
+              <span class="badge">npm</span>
+              <span class="badge">Postman</span>
+              <span class="badge">Netlify</span>
+              <span class="badge">Vercel</span>
+              <span class="badge">Linux</span>
+            </div>
+
+            <div class="resume-inline">
+              <h3 class="skills-group-title mt">Résumé</h3>
+              <p class="resume-note">Grab a one-page summary of my background.</p>
+              <a href="resume.pdf" download class="btn btn-primary btn-sm">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                Download Résumé
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-tag">06 — Contact</span>
+          <h2 class="section-title">Let's build something</h2>
+          <p class="section-lead">Have a role, a project, or just want to say hi? My inbox is open.</p>
+        </header>
+
+        <div class="contact-grid">
+          <form class="contact-form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your name" />
+              <small class="error" data-for="name"></small>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com" />
+              <small class="error" data-for="email"></small>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell me a little about it…"></textarea>
+              <small class="error" data-for="message"></small>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <aside class="contact-side reveal">
+            <h3>Reach me directly</h3>
+            <a class="contact-line" href="mailto:akashchandrancvn21@gmail.com">
+              akashchandrancvn21@gmail.com
+            </a>
+            <p class="contact-loc">Thiruvananthapuram, Kerala, India</p>
+
+            <h3 class="mt">Find me online</h3>
+            <div class="socials">
+              <a href="https://github.com/AKAZAAKASH" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8.4 23c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/akash-chandran-28b7b5307?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              </a>
+              <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="X / Twitter" title="X">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.24 2H21l-6.59 7.53L22 22h-6.41l-5-6.54L4.8 22H2l7.05-8.05L2 2h6.59l4.52 5.98L18.24 2zm-2.25 18h1.79L7.1 3.9H5.18L15.99 20z"/></svg>
+              </a>
+              <a href="https://leetcode.com/" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M13.48 0a1.37 1.37 0 0 0-.96.4L7.4 5.6a5.45 5.45 0 0 0 0 7.7l5.12 5.2a1.37 1.37 0 0 0 1.94-1.93l-5.12-5.2a2.7 2.7 0 0 1 0-3.84l5.12-5.2A1.37 1.37 0 0 0 13.48 0zM9.9 11a1.37 1.37 0 0 0 0 2.74h11.2a1.37 1.37 0 0 0 0-2.74H9.9z"/></svg>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Akash Chandran. Built with HTML, CSS, JS &amp; a bit of boost.</p>
+      <a href="#hero" class="footer-top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Back to top floating button -->
+  <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
