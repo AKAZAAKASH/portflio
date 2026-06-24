@@ -10,9 +10,9 @@
   --accent-2: #00cec9;
   --accent-grad: linear-gradient(135deg, #6c5ce7 0%, #00cec9 100%);
 
-  /* Typography */
-  --font-display: "Sora", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  /* Typography — condensed industrial display + clean body (Rocket League vibe) */
+  --font-display: "Saira Condensed", "Oswald", system-ui, sans-serif;
+  --font-body: "Saira", system-ui, sans-serif;
 
   /* Spacing / layout */
   --container: 1120px;
@@ -28,18 +28,20 @@
   --z-progress: 110;
 }
 
-/* Dark theme (default) */
+/* Dark theme (default) — Rocket League deep navy */
 [data-theme="dark"] {
-  --bg: #0b0d12;
-  --bg-alt: #11141b;
-  --surface: #151924;
-  --surface-2: #1b2030;
-  --border: #262c3a;
-  --text: #e8ebf2;
-  --text-soft: #aab2c5;
-  --text-mute: #79829a;
-  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7);
+  --bg: #0a0e1a;
+  --bg-alt: #0c1120;
+  --surface: #111a2e;
+  --surface-2: #17223a;
+  --border: #243049;
+  --text: #eef2fb;
+  --text-soft: #aab6cf;
+  --text-mute: #6e7c98;
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.8);
   --glow: var(--shadow); /* glow removed — falls back to a neutral shadow */
+  /* Hexagon honeycomb (white lines, low opacity) */
+  --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 /* Light theme */
@@ -54,6 +56,8 @@
   --text-mute: #79829a;
   --shadow: 0 18px 50px -24px rgba(31, 41, 99, 0.25);
   --glow: var(--shadow); /* glow removed — falls back to a neutral shadow */
+  /* Hexagon honeycomb (dark lines for light bg) */
+  --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z' fill='%231f2a44' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 /* ----- Reset / base ----- */
@@ -70,15 +74,23 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: var(--hex);          /* RL hexagon honeycomb */
+  background-size: 50px 87.5px;
   color: var(--text);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+  transition: background-color var(--speed) var(--ease), color var(--speed) var(--ease);
   overflow-x: hidden;
 }
 
-h1, h2, h3, .brand-text { font-family: var(--font-display); line-height: 1.15; }
+/* Bold condensed uppercase headings — Rocket League style */
+h1, h2, h3, .brand-text {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -98,69 +110,9 @@ ul { list-style: none; padding: 0; }
 }
 
 .section { padding-block: clamp(4rem, 9vw, 7rem); position: relative; }
-.section-alt { background: var(--bg-alt); }
-
-/* --- Per-section background personality -----------------------------------
-   Each main section gets its own CSS-drawn texture (dots, grid, lines,
-   confetti, glow). Patterns live on a ::before layer behind the content,
-   faded top & bottom with a mask so they never fight with the text.
-   Colors use color-mix, so they stay subtle in both dark and light themes.
-   --------------------------------------------------------------------------- */
+/* Alternating sections stay translucent so the hexagon pattern shows through */
+.section-alt { background: color-mix(in srgb, var(--bg-alt) 55%, transparent); }
 .section > .container { position: relative; z-index: 1; }
-
-.section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Fade the texture in/out vertically so section edges stay soft */
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-          mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-}
-
-/* About — polka dot grid (violet) */
-#about::before {
-  background-image: radial-gradient(circle, color-mix(in srgb, #6c5ce7 38%, transparent) 1.3px, transparent 1.6px);
-  background-size: 24px 24px;
-}
-
-/* Experience — diagonal pinstripes (teal) */
-#experience::before {
-  background-image: repeating-linear-gradient(45deg,
-    color-mix(in srgb, #00cec9 16%, transparent) 0 1px, transparent 1px 16px);
-}
-
-/* Projects — graph paper grid (blue) */
-#projects::before {
-  background-image:
-    linear-gradient(color-mix(in srgb, #0984e3 18%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, #0984e3 18%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Achievements — scattered confetti dots (coral) */
-#achievements::before {
-  background-image:
-    radial-gradient(circle, color-mix(in srgb, #e17055 40%, transparent) 2px, transparent 2.4px),
-    radial-gradient(circle, color-mix(in srgb, #fdcb6e 38%, transparent) 1.6px, transparent 2px);
-  background-size: 46px 46px, 46px 46px;
-  background-position: 0 0, 23px 23px;
-}
-
-/* Skills — woven crosshatch (green) */
-#skills::before {
-  background-image:
-    repeating-linear-gradient(45deg,  color-mix(in srgb, #00b894 14%, transparent) 0 1px, transparent 1px 18px),
-    repeating-linear-gradient(-45deg, color-mix(in srgb, #00b894 14%, transparent) 0 1px, transparent 1px 18px);
-}
-
-/* Contact — soft glowing blobs (pink + violet) */
-#contact::before {
-  background-image:
-    radial-gradient(42% 55% at 12% 18%, color-mix(in srgb, #e84393 22%, transparent), transparent 70%),
-    radial-gradient(45% 55% at 88% 82%, color-mix(in srgb, #6c5ce7 20%, transparent), transparent 70%);
-}
 
 /* ==========================================================================
    Scroll progress bar
@@ -205,11 +157,11 @@ ul { list-style: none; padding: 0; }
 
 .boost-gauge {
   position: relative;
-  width: 116px;
-  height: 116px;
+  width: 122px;
+  height: 122px;
   border-radius: 50%;
   /* Dark bezel disc so tick gaps read clean instead of showing the page */
-  background: radial-gradient(closest-side, #1b0c0e 0%, #150a0c 72%, rgba(21, 10, 12, 0) 100%);
+  background: radial-gradient(closest-side, #1b0c0e 0%, #150a0c 74%, rgba(21, 10, 12, 0) 100%);
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
 }
 /* Tick rim — individual bars generated by JS.
@@ -221,40 +173,67 @@ ul { list-style: none; padding: 0; }
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 3px;
+  width: 5.5px;
   height: var(--len, 10px);
-  margin-left: -1.5px;
-  border-radius: 2px;
+  margin-left: -2.75px;
   transform-origin: 50% 0;
-  transform: rotate(var(--a, 0deg)) translateY(var(--r, 40px));
-  background: linear-gradient(to top, #470d0f, #781513);   /* dim / unlit */
-  transition: background 0.12s linear, box-shadow 0.12s linear;
+  transform: rotate(var(--a, 0deg)) translateY(var(--r, 39px));
+  /* Wedge: narrow at the inner end, wider at the outer end (radial segment) */
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  background: linear-gradient(to bottom, #380b0d, #6a1311);   /* dim / unlit */
+  /* drop-shadow (not box-shadow) so the glow follows the clipped wedge */
+  transition: background 0.12s linear, filter 0.12s linear;
 }
 .b-tick.lit {
-  background: linear-gradient(to top, #ff7300, #ffc400 55%, #ffe98a);
-  box-shadow: 0 0 5px rgba(255, 180, 40, 0.8);
+  background: linear-gradient(to bottom, #ff7a00 0%, #ffc400 45%, #ffe88a 100%);
+  filter: drop-shadow(0 0 3px rgba(255, 180, 40, 0.85));
 }
 .b-tick.tip {   /* the leading, just-lit tick burns white-hot */
-  background: linear-gradient(to top, #ffd21a, #fff7d6);
-  box-shadow: 0 0 9px rgba(255, 235, 170, 0.95);
+  background: linear-gradient(to bottom, #ffce1a, #fff7d6);
+  filter: drop-shadow(0 0 5px rgba(255, 235, 170, 0.95));
+}
+
+/* Full boost — the whole gauge shimmers and the dome brightens */
+.boost-gauge.full {
+  animation: boostFull 1.3s ease-in-out infinite;
+}
+.boost-gauge.full .boost-core {
+  box-shadow:
+    inset 0 2px 5px rgba(255, 210, 170, 0.55),
+    inset 0 -10px 16px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 150, 70, 0.6),
+    0 0 18px rgba(255, 140, 40, 0.55);
+}
+.boost-gauge.full .b-tick.lit {
+  filter: drop-shadow(0 0 5px rgba(255, 200, 70, 0.95));
+}
+@keyframes boostFull {
+  0%, 100% {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55))
+            drop-shadow(0 0 5px rgba(255, 170, 40, 0.45));
+  }
+  50% {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55))
+            drop-shadow(0 0 16px rgba(255, 190, 70, 0.9));
+  }
 }
 /* Glossy domed center with the boost number */
 .boost-core {
   position: absolute;
-  inset: 17px;
+  inset: 21px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Domed shading: lit toward the top, deep maroon at the base */
+  /* Luminous domed orb: bright glowing red center, deep maroon edges */
   background:
-    radial-gradient(120% 90% at 50% 18%, #e0494a 0%, #b22a2c 28%, #7d1518 58%, #410d11 88%);
+    radial-gradient(125% 105% at 50% 30%, #ff5a59 0%, #e83a39 20%, #b21f22 44%, #6c1216 70%, #350a0e 93%);
   box-shadow:
-    inset 0 2px 5px rgba(255, 190, 150, 0.4),     /* top inner highlight */
-    inset 0 -10px 16px rgba(0, 0, 0, 0.55),       /* bottom inner shade */
-    inset 0 0 0 1px rgba(255, 120, 60, 0.35),     /* warm rim */
-    0 0 14px rgba(0, 0, 0, 0.4);
+    inset 0 3px 6px rgba(255, 200, 170, 0.5),     /* top inner highlight */
+    inset 0 -12px 18px rgba(0, 0, 0, 0.6),        /* bottom inner shade */
+    inset 0 0 0 1.5px rgba(255, 130, 70, 0.45),   /* warm rim */
+    0 0 16px rgba(255, 70, 50, 0.3);              /* soft red bloom */
   font-family: var(--font-display);
   overflow: hidden;
 }
@@ -504,13 +483,12 @@ ul { list-style: none; padding: 0; }
 }
 .grid-overlay {
   position: absolute; inset: 0;
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 54px 54px;
+  /* Hexagon honeycomb, brighter near the center of the hero */
+  background-image: var(--hex);
+  background-size: 50px 87.5px;
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
           mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
-  opacity: 0.4;
+  opacity: 0.9;
 }
 @keyframes float {
   0%, 100% { transform: translate(0, 0); }

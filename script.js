@@ -144,15 +144,16 @@
   const toTop = $("#toTop");
   const boostMeter = $("#boostMeter");
   const boostNum = $("#boostNum");
+  const boostGauge = $("#boostGauge");
 
   // Build the Rocket League boost-meter ticks once.
   // Ticks span an arc with an open gap at the bottom; the fill starts at the
   // bottom-left edge and grows up the left side and over the top.
-  const BOOST_TICKS = 50;
+  const BOOST_TICKS = 44;
   const tickEls = [];
   const boostRim = $("#boostRim");
   if (boostRim) {
-    const startA = 40, sweep = 280, rInner = 40, lenMin = 8, lenMax = 17;
+    const startA = 40, sweep = 280, rInner = 39, lenMin = 9, lenMax = 20;
     for (let i = 0; i < BOOST_TICKS; i++) {
       const t = i / (BOOST_TICKS - 1);
       const tick = document.createElement("div");
@@ -185,6 +186,8 @@
       tickEls[i].classList.toggle("lit", i < lit);
       tickEls[i].classList.toggle("tip", i === lit - 1 && lit < BOOST_TICKS);
     }
+    // Full boost: shimmer/pulse like the in-game meter when it's maxed
+    boostGauge?.classList.toggle("full", lit >= BOOST_TICKS);
     boostMeter?.classList.toggle("show", y > 160);
 
     // Navbar border once scrolled
